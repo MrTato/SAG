@@ -9,7 +9,7 @@
       >
       <ul class="right hide-on-med-and-down">
         <li>
-          <a href="sass.html"><i class="material-icons">add</i></a>
+          <a (click)="createNewFile()" routerLink="textEditor" target="_blank"><i class="material-icons">add</i></a>
         </li>
         <li>
           <a href="#modal1" class="waves-effect waves-light modal-trigger"
@@ -22,7 +22,7 @@
 
   <ul class="sidenav" id="mobile-demo">
     <li>
-      <a href="sass.html"><i class="material-icons">add</i>Create file</a>
+      <a (click)="createNewFile()" routerLink="textEditor" target="_blank"><i class="material-icons">add</i>Create file</a>
     </li>
     <li>
       <a href="#modal1" class="waves-effect waves-light modal-trigger"
@@ -55,6 +55,12 @@
     >
     </app-folder>
     <button (click)="goBackToParent()">Back</button>
+    <app-file
+      *ngFor="let file of folder.files; let i = index;"
+      [model]="file.model"
+      [index]="i"
+    >
+  </app-file>
   </main>
 
   <!-- Modal Structure -->

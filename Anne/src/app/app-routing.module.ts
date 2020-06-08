@@ -5,9 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'textEditor', component: TextEditorComponent },
-  { path: '', component: MainViewComponent, children: [
-    { path: ':folder', component: MainViewComponent }
-  ] }
+  { path: '', component: MainViewComponent }
 ];
 
 @NgModule({

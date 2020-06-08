@@ -8,13 +8,15 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { FolderComponent } from './components/main-view/folder/folder.component';
+import { FileComponent } from './components/main-view/folder/file/file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TextEditorComponent,
     MainViewComponent,
-    FolderComponent
+    FolderComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,

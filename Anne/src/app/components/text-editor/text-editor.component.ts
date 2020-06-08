@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { TextEditorService } from './../../services/text-editor/text-editor.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-text-editor',
@@ -8,13 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class TextEditorComponent implements OnInit {
   public model = {
     editorData: '',
+    fileName: '',
   };
+  @Output() valueChange = new EventEmitter();
 
-  constructor() {}
+  constructor(private textEditorService: TextEditorService) {}
 
   ngOnInit(): void {}
 
   onSave() {
-    alert('The document has been saved');
+    this.textEditorService.createFile(this.model);
   }
 }

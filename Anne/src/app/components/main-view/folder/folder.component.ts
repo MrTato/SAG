@@ -1,3 +1,5 @@
+import { TextEditorService } from './../../../services/text-editor/text-editor.service';
+import { FileComponent } from './file/file.component';
 import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FolderData } from 'src/app/interfaces/folder-data';
 
@@ -11,6 +13,7 @@ export class FolderComponent implements OnInit, AfterViewInit {
   @Input() childFolders: FolderComponent[] = [];
   @Input() folderData: FolderData;
   @Input() index: number;
+  @Input() files: FileComponent[] = [];
   @Output() explorationRequest: EventEmitter<FolderComponent> = new EventEmitter();
   @Output() deletionRequest: EventEmitter<number> = new EventEmitter();
 

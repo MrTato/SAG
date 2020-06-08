@@ -1,3 +1,4 @@
+import { TextEditorService } from './../../services/text-editor/text-editor.service';
 import {
   Component,
   OnInit,
@@ -23,7 +24,7 @@ export class MainViewComponent implements AfterViewInit {
     description: ''
   };
 
-  constructor() {}
+  constructor(private textEditorService: TextEditorService) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -69,5 +70,10 @@ export class MainViewComponent implements AfterViewInit {
 
   deleteFolder(index: number) {
     this.folder.childFolders.splice(index, 1);
+  }
+
+  createNewFile() {
+    this.textEditorService.folder = this.folder;
+    console.log("new file creation");
   }
 }
