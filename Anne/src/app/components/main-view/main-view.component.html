@@ -1,41 +1,78 @@
-<nav aria-label="Site Menu">
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"
-      ><i class="material-icons">menu</i></a
-    >
-    <ul class="right hide-on-med-and-down">
-      <li>
-        <a href="sass.html"><i class="material-icons">add</i></a>
-      </li>
-      <li>
-        <a href="badges.html"
-          ><i class="material-icons">create_new_folder</i></a
-        >
-      </li>
-    </ul>
-  </div>
-</nav>
+<body>
+  <nav aria-label="Site Menu">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo"
+        ><i class="material-icons">cloud</i>Logo</a
+      >
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+        ><i class="material-icons">menu</i></a
+      >
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="sass.html"><i class="material-icons">add</i></a>
+        </li>
+        <li>
+          <a href="#modal1" class="waves-effect waves-light modal-trigger"
+            ><i class="material-icons">create_new_folder</i></a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<ul class="sidenav" id="mobile-demo">
-  <li>
-    <a href="sass.html"><i class="material-icons">add</i>Create file</a>
-  </li>
-  <li>
-    <a href="badges.html"><i class="material-icons">create_new_folder</i>Create folder</a>
-  </li>
-</ul>
+  <ul class="sidenav" id="mobile-demo">
+    <li>
+      <a href="sass.html"><i class="material-icons">add</i>Create file</a>
+    </li>
+    <li>
+      <a href="#modal1" class="waves-effect waves-light modal-trigger"
+        ><i class="material-icons">create_new_folder</i>Create folder</a
+      >
+    </li>
+  </ul>
 
-<nav aria-label="Search bar">
-  <div class="nav-wrapper">
-    <form>
-      <div class="input-field">
-        <input id="search" type="search" required />
-        <label class="label-icon" for="search"
-          ><i class="material-icons">search</i></label
-        >
-        <i class="material-icons">close</i>
-      </div>
-    </form>
+  <nav aria-label="Search bar">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" required />
+          <label class="label-icon" for="search"
+            ><i class="material-icons">search</i></label
+          >
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+  <hr />
+
+  <main>
+    <app-folder *ngFor="let folder of folders" [folderData]="folder.folderData">
+    </app-folder>
+  </main>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Folder Creation</h4>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="title" name="folderTitle" type="text" class="validate" [(ngModel)]="newFolderData.title">
+            <label for="title">Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" name="folderDescription" class="materialize-textarea" [(ngModel)]="newFolderData.description"></textarea>
+            <label for="description">Description</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="createFolder()">Agree</a>
+    </div>
   </div>
-</nav>
+</body>
