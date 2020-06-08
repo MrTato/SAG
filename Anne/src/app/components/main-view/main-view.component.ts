@@ -16,8 +16,8 @@ import { FolderData } from 'src/app/interfaces/folder-data';
 })
 export class MainViewComponent implements AfterViewInit {
 
-  originFolder: FolderComponent;
-  folders: FolderComponent[] = [];
+  folder: FolderComponent = new FolderComponent();
+  originFolder: FolderComponent = this.folder;
   newFolderData: FolderData = {
     title: '',
     description: ''
@@ -37,26 +37,33 @@ export class MainViewComponent implements AfterViewInit {
   createFolder() {
     let folder = new FolderComponent();
     folder.folderData = this.newFolderData;
-    if (this.originFolder == null) {
-
-    }
-    this.folders.push(folder);
+    folder.parentFolder = this.originFolder;
+    this.folder.childFolders.push(folder);
     this.newFolderData ={
       title: '',
       description: ''
     }
-
     console.log('FolderCreation');
   }
 
   exploreFolder(folder: FolderComponent) {
-    this.folders = folder.childFolders;
-    console.log("Method working");
+    if (this.originFolder == this.folder) {
+      this.folder = folder;
+    } else {
+      this.originFolder.parentFolder = this.originFolder;
+      this.originFolder = this.folder;
+      this.folder = folder;
+    }
   }
 
   goBackToParent() {
-    if (this.originFolder == null) {
-      console.log("Currently on parent folder");
+    if(this.folder == this.originFolder) {
+      console.log('Already on the parent directory');
+    } else  if (this.originFolder.parentFolder == null) {
+      this.folder = this.originFolder;
+    } else {
+      this.folder = this.folder.parentFolder;
+      this.originFolder = this.originFolder.parentFolder;
     }
   }
 }

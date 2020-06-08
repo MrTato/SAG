@@ -47,7 +47,7 @@
 
   <main>
     <app-folder
-      *ngFor="let folder of folders"
+      *ngFor="let folder of folder.childFolders"
       [folderData]="folder.folderData"
       (explorationRequest)="exploreFolder($event)"
     >
