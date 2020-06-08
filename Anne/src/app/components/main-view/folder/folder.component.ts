@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FolderData } from 'src/app/interfaces/folder-data';
 
 @Component({
@@ -6,14 +6,28 @@ import { FolderData } from 'src/app/interfaces/folder-data';
   templateUrl: './folder.component.html',
   styleUrls: ['./folder.component.css'],
 })
-export class FolderComponent implements OnInit {
+export class FolderComponent implements OnInit, AfterViewInit {
+  @Input() childFolders: FolderComponent[];
   @Input() folderData: FolderData;
-  folder: {};
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
-    console.log(this.folderData.title);
-    console.log(this.folderData.description);
+  }
+
+  ngAfterViewInit() {
+    let folder = new FolderComponent();
+    folder.folderData = {
+      title: 'Test',
+      description: 'Test'
+    }
+    this.childFolders = [
+      folder
+    ];
+  }
+
+  exploreContent() {
+    console.log("Exploring content");
   }
 }
