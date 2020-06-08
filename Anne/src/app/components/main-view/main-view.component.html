@@ -47,9 +47,11 @@
 
   <main>
     <app-folder
-      *ngFor="let folder of folder.childFolders"
+      *ngFor="let folder of folder.childFolders; let i = index;"
       [folderData]="folder.folderData"
+      [index] = "i"
       (explorationRequest)="exploreFolder($event)"
+      (deletionRequest)="deleteFolder($event)"
     >
     </app-folder>
     <button (click)="goBackToParent()">Back</button>

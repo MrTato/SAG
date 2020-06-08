@@ -66,4 +66,8 @@ export class MainViewComponent implements AfterViewInit {
       this.originFolder = this.originFolder.parentFolder;
     }
   }
+
+  deleteFolder(index: number) {
+    this.folder.childFolders.splice(index, 1);
+  }
 }
