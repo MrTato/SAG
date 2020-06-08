@@ -46,8 +46,13 @@
   </nav>
 
   <main>
-    <app-folder *ngFor="let folder of folders" [folderData]="folder.folderData">
+    <app-folder
+      *ngFor="let folder of folders"
+      [folderData]="folder.folderData"
+      (explorationRequest)="exploreFolder($event)"
+    >
     </app-folder>
+    <button (click)="goBackToParent()">Back</button>
   </main>
 
   <!-- Modal Structure -->
@@ -57,20 +62,36 @@
       <form class="col s12">
         <div class="row">
           <div class="input-field col s6">
-            <input id="title" name="folderTitle" type="text" class="validate" [(ngModel)]="newFolderData.title">
+            <input
+              id="title"
+              name="folderTitle"
+              type="text"
+              class="validate"
+              [(ngModel)]="newFolderData.title"
+            />
             <label for="title">Title</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="description" name="folderDescription" class="materialize-textarea" [(ngModel)]="newFolderData.description"></textarea>
+            <textarea
+              id="description"
+              name="folderDescription"
+              class="materialize-textarea"
+              [(ngModel)]="newFolderData.description"
+            ></textarea>
             <label for="description">Description</label>
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="createFolder()">Agree</a>
+      <a
+        href="#!"
+        class="modal-action modal-close waves-effect waves-green btn-flat"
+        (click)="createFolder()"
+        >Agree</a
+      >
     </div>
   </div>
 </body>

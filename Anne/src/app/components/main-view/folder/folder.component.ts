@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FolderData } from 'src/app/interfaces/folder-data';
 
 @Component({
@@ -7,8 +7,10 @@ import { FolderData } from 'src/app/interfaces/folder-data';
   styleUrls: ['./folder.component.css'],
 })
 export class FolderComponent implements OnInit, AfterViewInit {
-  @Input() childFolders: FolderComponent[];
+  @Input() parentFolder: FolderComponent;
+  @Input() childFolders: FolderComponent[] = [];
   @Input() folderData: FolderData;
+  @Output() explorationRequest: EventEmitter<FolderComponent> = new EventEmitter();
 
   constructor() {
   }
@@ -17,17 +19,11 @@ export class FolderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    let folder = new FolderComponent();
-    folder.folderData = {
-      title: 'Test',
-      description: 'Test'
-    }
-    this.childFolders = [
-      folder
-    ];
+
   }
 
   exploreContent() {
     console.log("Exploring content");
+    this.explorationRequest.emit(this);
   }
 }

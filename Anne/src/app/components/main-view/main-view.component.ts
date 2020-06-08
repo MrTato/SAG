@@ -16,6 +16,7 @@ import { FolderData } from 'src/app/interfaces/folder-data';
 })
 export class MainViewComponent implements AfterViewInit {
 
+  originFolder: FolderComponent;
   folders: FolderComponent[] = [];
   newFolderData: FolderData = {
     title: '',
@@ -36,11 +37,26 @@ export class MainViewComponent implements AfterViewInit {
   createFolder() {
     let folder = new FolderComponent();
     folder.folderData = this.newFolderData;
+    if (this.originFolder == null) {
+
+    }
     this.folders.push(folder);
     this.newFolderData ={
       title: '',
       description: ''
     }
+
     console.log('FolderCreation');
+  }
+
+  exploreFolder(folder: FolderComponent) {
+    this.folders = folder.childFolders;
+    console.log("Method working");
+  }
+
+  goBackToParent() {
+    if (this.originFolder == null) {
+      console.log("Currently on parent folder");
+    }
   }
 }
