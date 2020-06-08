@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserModule,
