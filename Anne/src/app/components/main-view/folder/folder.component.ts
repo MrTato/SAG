@@ -36,4 +36,8 @@ export class FolderComponent implements OnInit, AfterViewInit {
     console.log("Deleting content");
     this.deletionRequest.emit(this.index);
   }
+
+  addFile(file: FileComponent) {
+    this.files.push(file);
+  }
 }

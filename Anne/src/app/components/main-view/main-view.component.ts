@@ -9,6 +9,7 @@ import {
 import * as M from 'materialize-css';
 import { FolderComponent } from './folder/folder.component';
 import { FolderData } from 'src/app/interfaces/folder-data';
+import { FileComponent } from './folder/file/file.component';
 
 @Component({
   selector: 'app-main-view',
@@ -17,14 +18,7 @@ import { FolderData } from 'src/app/interfaces/folder-data';
 })
 export class MainViewComponent implements AfterViewInit {
 
-  folder: FolderComponent = new FolderComponent();
-  originFolder: FolderComponent = this.folder;
-  newFolderData: FolderData = {
-    title: '',
-    description: ''
-  };
-
-  constructor(private textEditorService: TextEditorService) {}
+  constructor(public textEditorService: TextEditorService) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -37,10 +31,10 @@ export class MainViewComponent implements AfterViewInit {
 
   createFolder() {
     let folder = new FolderComponent();
-    folder.folderData = this.newFolderData;
-    folder.parentFolder = this.originFolder;
-    this.folder.childFolders.push(folder);
-    this.newFolderData ={
+    folder.folderData = this.textEditorService.newFolderData;
+    folder.parentFolder = this.textEditorService.originFolder;
+    this.textEditorService.folder.childFolders.push(folder);
+    this.textEditorService.newFolderData ={
       title: '',
       description: ''
     }
@@ -48,32 +42,34 @@ export class MainViewComponent implements AfterViewInit {
   }
 
   exploreFolder(folder: FolderComponent) {
-    if (this.originFolder == this.folder) {
-      this.folder = folder;
+    if (this.textEditorService.originFolder == this.textEditorService.folder) {
+      this.textEditorService.folder = folder;
     } else {
-      this.originFolder.parentFolder = this.originFolder;
-      this.originFolder = this.folder;
-      this.folder = folder;
+      this.textEditorService.originFolder.parentFolder = this.textEditorService.originFolder;
+      this.textEditorService.originFolder = this.textEditorService.folder;
+      this.textEditorService.folder = folder;
     }
   }
 
   goBackToParent() {
-    if(this.folder == this.originFolder) {
+    if(this.textEditorService.folder == this.textEditorService.originFolder) {
       console.log('Already on the parent directory');
-    } else  if (this.originFolder.parentFolder == null) {
-      this.folder = this.originFolder;
+    } else  if (this.textEditorService.originFolder.parentFolder == null) {
+      this.textEditorService.folder = this.textEditorService.originFolder;
     } else {
-      this.folder = this.folder.parentFolder;
-      this.originFolder = this.originFolder.parentFolder;
+      this.textEditorService.folder = this.textEditorService.folder.parentFolder;
+      this.textEditorService.originFolder = this.textEditorService.originFolder.parentFolder;
     }
   }
 
   deleteFolder(index: number) {
-    this.folder.childFolders.splice(index, 1);
+    this.textEditorService.folder.childFolders.splice(index, 1);
   }
 
   createNewFile() {
-    this.textEditorService.folder = this.folder;
+    let file = new FileComponent();
+    file.model.fileName = "NEW";
+    this.textEditorService.folder.addFile(file);
     console.log("new file creation");
   }
 }

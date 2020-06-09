@@ -9,7 +9,7 @@
       >
       <ul class="right hide-on-med-and-down">
         <li>
-          <a (click)="createNewFile()" routerLink="textEditor" target="_blank"><i class="material-icons">add</i></a>
+          <a (click)="createNewFile()"><i class="material-icons">add</i></a>
         </li>
         <li>
           <a href="#modal1" class="waves-effect waves-light modal-trigger"
@@ -22,7 +22,7 @@
 
   <ul class="sidenav" id="mobile-demo">
     <li>
-      <a (click)="createNewFile()" routerLink="textEditor" target="_blank"><i class="material-icons">add</i>Create file</a>
+      <a (click)="createNewFile()"><i class="material-icons">add</i>Create file</a>
     </li>
     <li>
       <a href="#modal1" class="waves-effect waves-light modal-trigger"
@@ -47,7 +47,7 @@
 
   <main>
     <app-folder
-      *ngFor="let folder of folder.childFolders; let i = index;"
+      *ngFor="let folder of textEditorService.folder.childFolders; let i = index;"
       [folderData]="folder.folderData"
       [index] = "i"
       (explorationRequest)="exploreFolder($event)"
@@ -56,7 +56,7 @@
     </app-folder>
     <button (click)="goBackToParent()">Back</button>
     <app-file
-      *ngFor="let file of folder.files; let i = index;"
+      *ngFor="let file of textEditorService.folder.files; let i = index;"
       [model]="file.model"
       [index]="i"
     >
@@ -75,7 +75,7 @@
               name="folderTitle"
               type="text"
               class="validate"
-              [(ngModel)]="newFolderData.title"
+              [(ngModel)]="textEditorService.newFolderData.title"
             />
             <label for="title">Title</label>
           </div>
@@ -86,7 +86,7 @@
               id="description"
               name="folderDescription"
               class="materialize-textarea"
-              [(ngModel)]="newFolderData.description"
+              [(ngModel)]="textEditorService.newFolderData.description"
             ></textarea>
             <label for="description">Description</label>
           </div>

@@ -12,12 +12,17 @@ export class TextEditorComponent implements OnInit {
     fileName: '',
   };
   @Output() valueChange = new EventEmitter();
+  index: number;
 
-  constructor(private textEditorService: TextEditorService) {}
+  constructor(public textEditorService: TextEditorService) {}
 
   ngOnInit(): void {}
 
   onSave() {
-    this.textEditorService.createFile(this.model);
+    this.textEditorService.updateFile(this.model, this.index);
+  }
+
+  checkIndex(index) {
+    this.index = index;
   }
 }

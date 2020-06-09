@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-file',
@@ -12,6 +12,11 @@ export class FileComponent {
       fileName: '',
     };
   @Input() index;
+  @Output() indexValue = new EventEmitter();
+
+  openEditor() {
+    this.indexValue.emit(this.index);
+  }
 
   constructor() { }
 
